@@ -3,17 +3,32 @@
 
 <h1>Books</h1>
 
-<%= @books.each do |book| %>
+<% @books.each do |book| %>
   
   <p>Title</p>
   <span>
     <%= link_to book.title, book_path(book.id) %>
   </span>
   
+  <p>Body</p>
+  <span>
+    <%= link_to book.body, book_path(book.id) %>
+  </span>
   
 <% end %>
 
 <h2>New book</h2>
+
+<% if @book.errors.any? %>
+  <%= @book.errors.count %>Error Occurred
+  <ul>
+    <% @book.errors.full_messages.each do |message| %>
+      <li><%= message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+
 <%= form_with model: @book do |f| %>
   <p>Title</p>
   <%= f.text_field :title %>
