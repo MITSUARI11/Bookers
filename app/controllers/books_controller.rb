@@ -11,6 +11,7 @@ class BooksController < ApplicationController
       flash[:notice] = "book was successfully created"
       redirect_to book_path(@book.id)
     else
+      flash.now[:alert] = "error occurred during submission"
       @books = Book.all
       render :index
     end
@@ -33,6 +34,7 @@ class BooksController < ApplicationController
       redirect_to book_path(@book.id)
       flash[:notice] = "book has been successfully updated"
     else
+      flash.now[:alert] = "error occurred during update"
       render :edit
     end
   end
